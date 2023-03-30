@@ -11,8 +11,30 @@ case ${number_of_ethernet} in
 	exit 1 ;;
 esac
 
-# Set network interface
-for var in {0..${number_of_ethernet}}
+# Set openvswitch bridge
+sudo ovs-vsctl del-br br${AVEES_CLUSTERING_NODE_ID}
+sudo ovs-vsctl add-br br${AVEES_CLUSTERING_NODE_ID} -- set bridge br${AVEES_CLUSTERING_NODE_ID} datapath_type=netdev
+sudo ovs-vsctl set bridge br${AVEES_CLUSTERING_NODE_ID} stp_enable=true
+sudo ovs-vsctl set-fail-mode br${AVEES_CLUSTERING_NODE_ID} standalone
+sudo ovs-vsctl set-controller br${AVEES_CLUSTERING_NODE_ID} tcp:192.168.1.5:6633
+
+for var in $(seq 0 $(expr ${number_of_ethernet} - 1))
 do
-  echo "Set eth${var} to 192.168.2.${number_of_ethernet}$(expr ${var}+1)"
+  echo "openvswitch add port eth${var}"
+  sudo ovs-vsctl add-port br${AVEES_CLUSTERING_NODE_ID} eth${var}
+done
+
+# Set network interface
+for var in $(seq 0 $(expr ${number_of_ethernet} - 1))
+do
+  echo "Set eth${var} to 192.168.2.${AVEES_CLUSTERING_NODE_ID}$(expr ${var} + 1)"
+  sudo ifconfig eth${var} 192.168.2.${AVEES_CLUSTERING_NODE_ID}$(expr ${var} + 1)
+done
+
+sudo ifconfig br${AVEES_CLUSTERING_NODE_ID} 192.168.2.${AVEES_CLUSTERING_NODE_ID}0
+
+for var in $(seq 0 $(expr ${number_of_ethernet} - 1))
+do
+  echo "Set eth${var} down"
+  sudo ifconfig eth${var} 0
 done
