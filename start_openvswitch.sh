@@ -2,6 +2,7 @@
 # start_openvswitch.sh
 
 # Open vSwitch Start
+cd ~/ovs
 sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovsschema
 sudo mkdir -p /usr/local/var/run/openvswitch
 export PATH=$PATH:/usr/local/share/openvswitch/scripts
