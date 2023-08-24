@@ -2,7 +2,7 @@
 # start_openvswitch.sh
 
 # Open vSwitch Start
-if [-e /usr/local/etc/openvswitch/conf.db]; then
+if [ ! -e /usr/local/etc/openvswitch/conf.db ]; then
   cd ~/ovs
   sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovsschema
 fi
