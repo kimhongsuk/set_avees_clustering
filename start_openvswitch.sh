@@ -45,10 +45,3 @@ done
 
 # Set openvswitch interface up
 sudo ifconfig br${AVEES_CLUSTERING_NODE_ID} 192.168.2.${AVEES_CLUSTERING_NODE_ID}0
-
-# Set network interface down
-for var in $(seq 0 $(expr ${number_of_ethernet} - 1))
-do
-  echo "Set eth${var} down"
-  sudo ifconfig eth${var} 0
-done
