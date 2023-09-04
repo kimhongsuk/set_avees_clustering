@@ -35,6 +35,7 @@ cd ~/ros2_ws && colcon_build
 echo "\n" >> ~/.bahsrc
 echo "# Show Node's Number" >> ~/.bashrc
 echo "echo "Node ${node_index}"" >> ~/.bashrc
+echo "export AVEES_CLUSTERING_NODE_ID=${node_index}" >> ~/.bashrc
 
 echo "\n" >> ~/.bahsrc
 echo "# Setup ROS2 environment" >> ~/.bashrc
