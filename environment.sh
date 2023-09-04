@@ -30,22 +30,24 @@ sudo apt install ros-dev-tools -y
 cd ~/
 mkdir -p ros2_ws/src
 cd ~/ros2_ws && colcon_build
-#source ~/ros2_ws/install/setup.bash
 
-# Alias
+# Set Alias in ~/.bashrc
 echo "\n" >> ~/.bahsrc
 echo "# Show Node's Number" >> ~/.bashrc
 echo "echo "Node ${node_index}"" >> ~/.bashrc
 
+echo "\n" >> ~/.bahsrc
 echo "# Setup ROS2 environment" >> ~/.bashrc
 echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
 echo "export ROS_DOMAIN_ID=102" >> ~/.bashrc
 
+echo "\n" >> ~/.bahsrc
 echo "# Set more alias to ROS2" >> ~/.bashrc
 echo "alias cm='cd ~/ros2_ws; colcon build --symlink-install; source install/setup.bash'" >> ~/.bashrc
 echo "alias sb='cd ~/ros2_ws; source install/setup.bash'" >> ~/.bashrc
 
+echo "\n" >> ~/.bahsrc
 echo "# Github alias" >> ~/.bashrc
 echo "alias cs='cd ~/ros2_ws/src/clustering_sensor'" >> ~/.bashrc
 
@@ -57,21 +59,9 @@ cd /opt/Vimba_6_0/VimbaGigETL
 sudo ./Install.sh
 sudo apt install ros-foxy-diagnostic-updater -y
 sudo apt install ros-foxy-camera-info-manager -y
-
-## Get source files
-#cd ~/ros2_ws/src
 sudo apt install ros-foxy-vision-msgs -y
-#git clone https://github.com/AveesLab/clustering_sensor.git
-#cd ~/rosw_ws/src/clustering_sensor
-#git checkout ethernet
-#
-## Build sources
-#cd ~/ros2_ws
-#source ~/ros2_ws/install/setup.bash
-#colcon build --symlink-install
-#source ~/ros2_ws/install/setup.bash
 
-# Open vSwitch Install
+# Install Open-vSwitch
 cd ~/.
 sudo apt install automake python-six libssl-dev -y
 git clone -b branch-2.8 --single-branch https://github.com/openvswitch/ovs.git
