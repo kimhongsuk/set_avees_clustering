@@ -66,11 +66,11 @@ sudo apt install ros-foxy-vision-msgs -y
 cd ~/set_avees_clustering/files
 wget https://www.peak-system.com/fileadmin/media/linux/files/peak-linux-driver-8.16.0.tar.gz
 wget https://www.peak-system.com/produktcd/Develop/PC%20interfaces/Linux/PCAN-Basic_API_for_Linux/PCAN-Basic_Linux-4.7.0.3.tar.gz
-tar -xzf peak-linux-driver-8.16.0.tar
+tar -xzf peak-linux-driver-8.16.0.tar.gz
+tar -xvf PCAN-Basic_Linux-4.7.0.3.tar.gz
 cd ~/set_avees_clustering/files/peak-linux-driver-8.16.0
 make NET=NO_NETDEV_SUPPORT
 sudo make install
-tar -xvf PCAN-Basic_Linux-4.7.0.3.tar.gz
 cd ~/set_avees_clustering/files/PCAN-Basic_Linux-4.7.0.3/libpcanbasic/pcanbasic
 make clean
 make
