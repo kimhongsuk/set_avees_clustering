@@ -53,7 +53,7 @@ echo "# Github alias" >> ~/.bashrc
 echo "alias cs='cd ~/ros2_ws/src/clustering_sensor'" >> ~/.bashrc
 
 # GigE Camera
-cd ~/set_avees_clustering
+cd ~/set_avees_clustering/files
 wget https://downloads.alliedvision.com/Vimba_v6.0_ARM64.tgz
 sudo tar -xzf Vimba_v6.0_ARM64.tgz -C /opt
 cd /opt/Vimba_6_0/VimbaGigETL
@@ -62,12 +62,21 @@ sudo apt install ros-foxy-diagnostic-updater -y
 sudo apt install ros-foxy-camera-info-manager -y
 sudo apt install ros-foxy-vision-msgs -y
 
-# Install Open-vSwitch
-cd ~/.
-sudo apt install automake python-six libssl-dev -y
-git clone -b branch-2.8 --single-branch https://github.com/openvswitch/ovs.git
-cd ~/ovs
-./boot.sh
-./configure
-make -j6
+# PCAN
+cd ~/set_avees_clustering/files
+wget https://www.peak-system.com/fileadmin/media/linux/files/peak-linux-driver-8.16.0.tar.gz
+wget https://www.peak-system.com/produktcd/Develop/PC%20interfaces/Linux/PCAN-Basic_API_for_Linux/PCAN-Basic_Linux-4.7.0.3.tar.gz
+tar -xzf peak-linux-driver-8.16.0.tar
+cd ~/set_avees_clustering/files/peak-linux-driver-8.16.0
+make NET=NO_NETDEV_SUPPORT
 sudo make install
+tar -xvf PCAN-Basic_Linux-4.7.0.3.tar.gz
+cd ~/set_avees_clustering/files/PCAN-Basic_Linux-4.7.0.3/libpcanbasic/pcanbasic
+make clean
+make
+sudo make install
+cd ~/set_avees_clustering/files/PCAN-Basic_Linux-4.7.0.3/libpcanbasic/examples/console/NativeC++
+make
+
+# Time Synchronization
+sudo apt install chrony -y
